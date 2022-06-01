@@ -1,20 +1,16 @@
-<script lang="ts">
-	import { useVest } from './use-vest';
+<script>
+	// Change this to ./use-vest to see it working
+	// import { useVest } from './use-vest';
+	import { useVest } from 'use-vest';
 
-	// Import everything about our vest suite.
-	import { suite, initialData, type FormData } from './test-suite';
+	import { create } from 'vest';
 
-	// A fake submit implementation
-	import { setContext } from 'svelte';
+	const suite = create(() => null);
 
-	setContext('foo', 'bar');
-
-	const { action } = useVest<FormData>(suite, {
-		initialData,
-		submit: async () => {
-			console.log('Submitting...');
-		}
+	const { action } = useVest(suite, {
+		initialData: {},
+		submit: () => Promise.resolve()
 	});
 </script>
 
-<form use:action />
+<form use:action>My Form</form>
